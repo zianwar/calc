@@ -1,5 +1,6 @@
 # calc
-Command line utility for advanced math operations built with [Go](https://golang.org), uses the [https://newton.now.sh/](https://newton.now.sh/) Math API under the hood.
+Command line utility for advanced math operations built with [Go](https://golang.org).  
+Uses the [https://newton.now.sh/](https://newton.now.sh/) Math API under the hood.
 
 ### Installation:
 1. Make sure you have [Go](http://golang.org/doc/install.html) installed
@@ -23,7 +24,7 @@ Usage: calc [operation] [expression]
 	 arctan:     Inverse Tangent of number  eg:           0   =>                  0
 	 abs:        Absolute Value of number   eg:          -1   =>                  1
 	 factor:     Factorise expression.      eg:    x^2 + 2x   =>           x(x + 2)
-	 integrate:  integrates expression.      eg:    x^2 + 2x   =>  1/3 x^3 + x^2 + C
+	 integrate:  integrates expression.      eg:    x^2 + 2x  =>  1/3 x^3 + x^2 + C
 	 tan:        Tangent of number.         eg:           0   =>                  0
 	 arcsin:     Inverse Sine of number     eg:           0   =>                  0
 	 log:        Logarithm                  eg:         218   =>                  3
@@ -36,8 +37,8 @@ Usage: calc [operation] [expression]
 
 ```
 $ calc integrate "x"
-1/2 x^2
+  1/2 x^2
 
 $ calc simplify "1+2-2"
-1
+  1
 ```
