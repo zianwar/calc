@@ -20,14 +20,13 @@ Usage: calc [operation] [expression]
 	 zeroes:     Finds expression zeros.    eg:    x^2 + 2x   =>            [-2, 0]
 	 cos:        Cosine of number.          eg:          pi   =>                 -1
 	 sin:        Sine of number.            eg:           0   =>                  0
-	 arccos:     Inverse Cosine of number   eg:           1   =>                  0
-	 arctan:     Inverse Tangent of number  eg:           0   =>                  0
-	 abs:        Absolute Value of number   eg:          -1   =>                  1
+	 arccos:     Inverse Cosine of number.  eg:           1   =>                  0
+	 arctan:     Inverse Tangent of number. eg:           0   =>                  0
+	 abs:        Absolute Value of number.  eg:          -1   =>                  1
 	 factor:     Factorise expression.      eg:    x^2 + 2x   =>           x(x + 2)
-	 integrate:  integrates expression.      eg:    x^2 + 2x  =>  1/3 x^3 + x^2 + C
+	 integrate:  integrates expression.     eg:    x^2 + 2x  =>  1/3 x^3 + x^2 + C
 	 tan:        Tangent of number.         eg:           0   =>                  0
-	 arcsin:     Inverse Sine of number     eg:           0   =>                  0
-	 log:        Logarithm                  eg:         218   =>                  3
+	 arcsin:     Inverse Sine of number.    eg:           0   =>                  0
 	 simplify:   Simplifies expression.     eg:  2^2 + 2(2)   =>                  8
 
   • And expression could be any number or mathematical equation.
