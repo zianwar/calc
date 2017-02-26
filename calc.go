@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"strings"
 
@@ -39,24 +40,23 @@ func main() {
 	}
 
 	expression := strings.Replace(strings.Join(rest, " "), " ", "", -1)
+	URL := "https://newton.now.sh/" + op + "/" + url.QueryEscape(expression)
 
-	resp, err := http.Get("https://newton.now.sh/" + op + "/" + expression)
-	fatal(err)
+	resp, err := http.Get(URL)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	body, err := ioutil.ReadAll(resp.Body)
-	fatal(err)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	defer resp.Body.Close()
 
 	var result map[string]string
 	json.Unmarshal([]byte(body), &result)
 	fmt.Println(result["result"])
-}
-
-func fatal(err interface{}) {
-	if err != nil {
-		log.Fatal(err)
-	}
 }
 
 func usage() {
