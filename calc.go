@@ -21,11 +21,10 @@ var operations = map[string]string{
 	"cos":       `      Cosine of number.          eg:          pi   =>                 -1`,
 	"sin":       `      Sine of number.            eg:           0   =>                  0`,
 	"tan":       `      Tangent of number.         eg:           0   =>                  0`,
-	"arccos":    `   Inverse Cosine of number   eg:           1   =>                  0`,
-	"arcsin":    `   Inverse Sine of number     eg:           0   =>                  0`,
-	"arctan":    `   Inverse Tangent of number  eg:           0   =>                  0`,
-	"abs":       `      Absolute Value of number   eg:          -1   =>                  1`,
-	"log":       `      Logarithm                  eg:         218   =>                  3`,
+	"arccos":    `   Inverse Cosine of number.  eg:           1   =>                  0`,
+	"arcsin":    `   Inverse Sine of number.    eg:           0   =>                  0`,
+	"arctan":    `   Inverse Tangent of number. eg:           0   =>                  0`,
+	"abs":       `      Absolute Value of number.  eg:          -1   =>                  1`,
 }
 
 func main() {
