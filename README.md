@@ -9,9 +9,12 @@ Uses the [https://newton.now.sh/](https://newton.now.sh/) Math API under the hoo
 $ go get github.com/Zianwar/calc
 ```
 
+
 ### Usage:
 
 ```
+$ $GOPATH/bin/calc
+
 Usage: calc [operation] [expression]
 
   • Where operation is defined as:
@@ -33,6 +36,7 @@ Usage: calc [operation] [expression]
 ```
 
 ### Examples
+> Assuming you have `$GOPATH/bin` in your global `/bin` directory
 
 ```
 $ calc integrate "x"
