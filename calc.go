@@ -2,15 +2,13 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 	"os"
 	"strings"
-
-	"github.com/fatih/color"
 )
 
 var operations = map[string]string{
@@ -29,45 +27,70 @@ var operations = map[string]string{
 }
 
 func main() {
-	if l := len(os.Args[1:]); l < 2 {
+	m, err := validateArgs(os.Args)
+	if err != nil {
+		fmt.Print(err)
 		usage()
 	}
+	url := fmt.Sprintf("https://newton.now.sh/%s/%s", m["operation"], m["expression"])
 
-	op, rest := os.Args[1], os.Args[2:]
-
-	if _, ok := operations[strings.Replace(op, " ", "", -1)]; !ok {
-		fmt.Print("\"" + op + "\" operation not recognized.")
-	}
-
-	expression := strings.Replace(strings.Join(rest, " "), " ", "", -1)
-	URL := "https://newton.now.sh/" + op + "/" + url.QueryEscape(expression)
-
-	resp, err := http.Get(URL)
+	r, err := get(url)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Print(err)
 	}
 
+	fmt.Println(r["result"])
+}
+
+func validateArgs(args []string) (map[string]string, error) {
+	var valid map[string]string
+
+	if l := len(args[1:]); l < 2 {
+		usage()
+		os.Exit(1)
+	}
+
+	op, exp := args[1], args[2:]
+	operation := strings.Replace(op, " ", "", -1)
+
+	if _, ok := operations[op]; !ok {
+		return valid, errors.New("\"" + op + "\" operation not recognized.")
+	}
+
+	expression := url.QueryEscape(strings.Replace(strings.Join(exp, " "), " ", "", -1))
+	valid = map[string]string{
+		"operation":  operation,
+		"expression": expression,
+	}
+
+	return valid, nil
+}
+
+func get(url string) (result map[string]string, err error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	defer resp.Body.Close()
-
-	var result map[string]string
 	json.Unmarshal([]byte(body), &result)
-	fmt.Println(result["result"])
+
+	if _, ok := result["error"]; ok {
+		return nil, fmt.Errorf("Error: %s", result["error"])
+	}
+
+	return result, nil
 }
 
 func usage() {
-	bold := color.New(color.Bold)
-	green := color.New(color.FgGreen)
-
-	fmt.Printf("\nUsage: %s [operation] [expression]\n\n", bold.Sprint(green.Sprint("calc")))
+	fmt.Printf("\nUsage: calc [operation] [expression]\n\n")
 	fmt.Print("  • Where operation is defined as:\n\n")
 	for cmd, desc := range operations {
 		fmt.Printf("\t %s:  %s\n", cmd, desc)
 	}
 	fmt.Print("\n  • And expression could be number or any mathematical equation.\n\n")
-	os.Exit(1)
 }
