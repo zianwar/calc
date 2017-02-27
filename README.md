@@ -36,7 +36,7 @@ Usage: calc [operation] [expression]
 ```
 
 ### Examples
-> Assuming you have `$GOPATH/bin` in your global `/bin` directory
+> Assuming you have `$GOPATH/bin` in your global `/bin` directory; so that `calc` could be called directly instead of `$GOPATH/bin/calc`
 
 ```
 $ calc integrate "x"
